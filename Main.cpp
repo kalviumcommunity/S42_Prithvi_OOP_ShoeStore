@@ -1,5 +1,5 @@
-#include "Shoe.cpp"      
-#include "Customer.cpp"  
+#include "Shoe.cpp"
+#include "Customer.cpp"
 
 int main() {
     // Creating an object of the Shoe class
@@ -9,7 +9,7 @@ int main() {
 
     // Creating an object of the Customer class
     Customer customer1;
-    customer1.setDetails("Prithvi", 69);
+    customer1.setDetails("John Doe", 30);
     customer1.displayDetails();
 
     return 0;
