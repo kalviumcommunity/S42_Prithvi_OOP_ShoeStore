@@ -4,38 +4,49 @@
 using namespace std;
 
 class Customer {
-public:
+private:
     string name;
     int age;
-    
-    static int totalCustomers;  // Static variable to count total number of customers
+    static int customerCount;  
 
-    // Constructor
+public:
     Customer() {
-        totalCustomers++;  // Increment totalCustomers when a new Customer object is created
+        name = "Unknown";
+        age = 0;
+        customerCount++;
     }
 
-    // Destructor
+    Customer(string n, int a) {
+        name = n;
+        age = a;
+        customerCount++;
+    }
+
+    
     ~Customer() {
-        totalCustomers--;  // Decrement totalCustomers when a Customer object is destroyed
+        customerCount--;  
     }
 
-    // Static member function to get total number of customers
-    static int getTotalCustomers() {
-        return totalCustomers;
+    static int getCustomerCount() {
+        return customerCount;
     }
 
-    // Member function to set details of a customer
     void setDetails(string name, int age) {
         this->name = name;
         this->age = age;
     }
 
-    // Member function to display details of a customer
-    void displayDetails() {
-        cout << "Customer Name: " << this->name << ", Age: " << this->age << endl;
+    void displayDetails() const {
+        cout << "Customer Name: " << name << ", Age: " << age << endl;
+    }
+
+    void checkEligibilityForDiscount() const {
+        if (age > 25) {
+            cout << name << " is eligible for a discount!" << endl;
+        } else {
+            cout << name << " is not eligible for a discount." << endl;
+        }
     }
 };
 
-// Initialize the static variable
-int Customer::totalCustomers = 0;
+int Customer::customerCount = 0;
