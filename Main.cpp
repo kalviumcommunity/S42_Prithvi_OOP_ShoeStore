@@ -2,23 +2,22 @@
 #include "Customer.cpp"
 
 int main() {
-    Sneaker sneaker("Nike", 42);
-    Boot boot("Timberland", 40);
-    Shoe basicShoe("Puma", "Sandals", 38);
+    Sneaker sneaker1("Nike", 42);
+    Boot boot1("Adidas", 40);
+    Sandal sandal1("Puma", 38);
 
-    sneaker.displayDetails();
-    boot.displayDetails();
-    basicShoe.displayDetails();
+    sneaker1.displayDetails();
+    boot1.displayDetails();
+    sandal1.displayDetails();
 
-    cout << "Total Shoes: " << Shoe::getTotalShoes() << endl;
+    PremiumCustomer premium1("John Doe", 30);
+    RegularCustomer regular1("Jane Smith", 25);
 
-    PremiumCustomer premiumCustomer("John Doe", 30);
-    RegularCustomer regularCustomer("Jane Smith", 22);
+    premium1.displayDetails();
+    regular1.displayDetails();
 
-    premiumCustomer.displayDetails();
-    regularCustomer.displayDetails();
-
-    cout << "Total Customers: " << Customer::getTotalCustomers() << endl;
+    premium1.checkDiscountEligibility();
+    regular1.checkDiscountEligibility();
 
     return 0;
 }
