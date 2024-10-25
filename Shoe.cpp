@@ -1,53 +1,58 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 class Shoe {
-private:
+protected:
     string brand;
     string type;
     int size;
-    static int shoeCount; 
+    static int totalShoes;
 
 public:
-    Shoe() {
-        brand = "Unknown";
-        type = "Unknown";
-        size = 0;
-        shoeCount++;
-    }
-
-    Shoe(string b, string t, int s) {
-        brand = b;
-        type = t;
-        size = s;
-        shoeCount++;
+    Shoe(string brand = "", string type = "", int size = 0) {
+        this->brand = brand;
+        this->type = type;
+        this->size = size;
+        totalShoes++;
     }
 
     
     ~Shoe() {
-        shoeCount--;  
+        totalShoes--;
     }
 
-    static int getShoeCount() {
-        return shoeCount;
+    static int getTotalShoes() {
+        return totalShoes;
     }
 
-    void setDetails(string brand, string type, int size) {
+    virtual void setDetails(string brand, string type, int size) {
         this->brand = brand;
         this->type = type;
         this->size = size;
     }
 
-    void displayDetails() const {
+    virtual void displayDetails() {
         cout << "Brand: " << brand << ", Type: " << type << ", Size: " << size << endl;
-    }
-
-    void printShoeType() const {
-        cout << "This is a " << type << " type of shoe." << endl;
     }
 };
 
+int Shoe::totalShoes = 0;
 
-int Shoe::shoeCount = 0;
+class Sneaker : public Shoe {
+public:
+    Sneaker(string brand = "", int size = 0) : Shoe(brand, "Sneaker", size) {}
+
+    void displayDetails() override {
+        cout << "Sneaker - Brand: " << brand << ", Size: " << size << endl;
+    }
+};
+
+class Boot : public Shoe {
+public:
+    Boot(string brand = "", int size = 0) : Shoe(brand, "Boot", size) {}
+
+    void displayDetails() override {
+        cout << "Boot - Brand: " << brand << ", Size: " << size << endl;
+    }
+};
