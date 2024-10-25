@@ -2,29 +2,23 @@
 #include "Customer.cpp"
 
 int main() {
-    Shoe shoes[3];
+    Sneaker sneaker("Nike", 42);
+    Boot boot("Timberland", 40);
+    Shoe basicShoe("Puma", "Sandals", 38);
 
-    shoes[0].setDetails("Nike", "Sneakers", 42);
-    shoes[1].setDetails("Adidas", "Boots", 40);
-    shoes[2].setDetails("Puma", "Sandals", 38);
+    sneaker.displayDetails();
+    boot.displayDetails();
+    basicShoe.displayDetails();
 
-    for (int i = 0; i < 3; ++i) {
-        shoes[i].displayDetails();
-        shoes[i].printShoeType();  
-    }
+    cout << "Total Shoes: " << Shoe::getTotalShoes() << endl;
 
-    Customer customers[2] = {
-        Customer("John Doe", 30),
-        Customer("Jane Smith", 25)
-    };
+    PremiumCustomer premiumCustomer("John Doe", 30);
+    RegularCustomer regularCustomer("Jane Smith", 22);
 
-    for (int i = 0; i < 2; ++i) {
-        customers[i].displayDetails();
-        customers[i].checkEligibilityForDiscount();  
-    }
+    premiumCustomer.displayDetails();
+    regularCustomer.displayDetails();
 
-    cout << "Total number of shoes: " << Shoe::getShoeCount() << endl;
-    cout << "Total number of customers: " << Customer::getCustomerCount() << endl;
+    cout << "Total Customers: " << Customer::getTotalCustomers() << endl;
 
     return 0;
 }
