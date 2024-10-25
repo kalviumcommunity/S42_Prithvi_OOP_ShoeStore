@@ -1,59 +1,52 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Customer {
 protected:
     string name;
     int age;
-    static int totalCustomers;
 
 public:
-    
-    Customer(string name = "", int age = 0) {
-        this->name = name;
-        this->age = age;
-        totalCustomers++;
-    }
+    static int customerCount;
 
-    ~Customer() {
-        totalCustomers--;
-    }
-
-    static int getTotalCustomers() {
-        return totalCustomers;
+    Customer() : name("Unknown"), age(0) {}  
+    Customer(string name, int age) : name(name), age(age) {
+        customerCount++;
     }
 
     virtual void displayDetails() {
         cout << "Customer Name: " << name << ", Age: " << age << endl;
     }
 
-    bool isEligibleForDiscount() {
-        return age > 25;
-    }
-};
-
-int Customer::totalCustomers = 0;
-
-class PremiumCustomer : public Customer {
-public:
-    PremiumCustomer(string name = "", int age = 0) : Customer(name, age) {}
-
-    void displayDetails() override {
-        cout << "Premium Customer Name: " << name << ", Age: " << age << endl;
-        if (isEligibleForDiscount()) {
-            cout << "Eligible for discount!" << endl;
+    virtual void checkDiscountEligibility() {
+        if (age > 25) {
+            cout << name << " is eligible for a premium discount." << endl;
         } else {
-            cout << "Not eligible for discount." << endl;
+            cout << name << " is not eligible for a premium discount." << endl;
         }
     }
 };
 
+int Customer::customerCount = 0;
+
 class RegularCustomer : public Customer {
 public:
-    RegularCustomer(string name = "", int age = 0) : Customer(name, age) {}
+    RegularCustomer() : Customer() {}
+    RegularCustomer(string name, int age) : Customer(name, age) {}
 
     void displayDetails() override {
-        cout << "Regular Customer Name: " << name << ", Age: " << age << endl;
+        cout << "Regular Customer: " << name << ", Age: " << age << endl;
+    }
+};
+
+class PremiumCustomer : public Customer {
+public:
+    PremiumCustomer() : Customer() {}
+    PremiumCustomer(string name, int age) : Customer(name, age) {}
+
+    void displayDetails() override {
+        cout << "Premium Customer: " << name << ", Age: " << age << endl;
     }
 };
