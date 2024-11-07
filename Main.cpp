@@ -10,14 +10,15 @@ int main() {
     boot1.displayDetails();
     sandal1.displayDetails();
 
-    PremiumCustomer premium1("John Doe", 30);
-    RegularCustomer regular1("Jane Smith", 25);
+    Customer* customers[2];
+    customers[0] = new PremiumCustomer("John Doe", 30);
+    customers[1] = new RegularCustomer("Jane Smith", 25);
 
-    premium1.displayDetails();
-    regular1.displayDetails();
-
-    premium1.checkDiscountEligibility();
-    regular1.checkDiscountEligibility();
+    for (int i = 0; i < 2; ++i) {
+        customers[i]->displayDetails();
+        customers[i]->checkDiscountEligibility();
+        delete customers[i]; 
+    }
 
     return 0;
 }

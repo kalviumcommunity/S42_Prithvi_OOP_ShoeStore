@@ -11,33 +11,39 @@ protected:
 
 public:
     Shoe() : brand("Unknown"), type("Unknown"), size(0) {}  
-    Shoe(string brand, string type, int size) : brand(brand), type(type), size(size) {}  
+    Shoe(string brand, string type, int size) : brand(brand), type(type), size(size) {}
 
-    void setDetails(string b, string t, int s) {
-        brand = b;
-        type = t;
-        size = s;
-    }
+    virtual void displayDetails() = 0; 
 
-    virtual void displayDetails() {
-        cout << "Brand: " << brand << ", Type: " << type << ", Size: " << size << endl;
-    }
+    virtual ~Shoe() {}   
 };
 
 class Sneaker : public Shoe {
 public:
     Sneaker() : Shoe() {}  
-    Sneaker(string brand, int size) : Shoe(brand, "Sneaker", size) {}  
+    Sneaker(string brand, int size) : Shoe(brand, "Sneaker", size) {}
+
+    void displayDetails() override {
+        cout << "Sneaker - Brand: " << brand << ", Size: " << size << endl;
+    }
 };
 
 class Boot : public Shoe {
 public:
-    Boot() : Shoe() {} 
-    Boot(string brand, int size) : Shoe(brand, "Boot", size) {}  
+    Boot() : Shoe() {}
+    Boot(string brand, int size) : Shoe(brand, "Boot", size) {}
+
+    void displayDetails() override {
+        cout << "Boot - Brand: " << brand << ", Size: " << size << endl;
+    }
 };
 
 class Sandal : public Shoe {
 public:
-    Sandal() : Shoe() {} 
-    Sandal(string brand, int size) : Shoe(brand, "Sandal", size) {} 
+    Sandal() : Shoe() {}
+    Sandal(string brand, int size) : Shoe(brand, "Sandal", size) {}
+
+    void displayDetails() override {
+        cout << "Sandal - Brand: " << brand << ", Size: " << size << endl;
+    }
 };
