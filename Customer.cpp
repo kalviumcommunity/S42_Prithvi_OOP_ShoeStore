@@ -16,17 +16,11 @@ public:
         customerCount++;
     }
 
-    virtual void displayDetails() {
-        cout << "Customer Name: " << name << ", Age: " << age << endl;
-    }
+    virtual void displayDetails() = 0;  
 
-    virtual void checkDiscountEligibility() {
-        if (age > 25) {
-            cout << name << " is eligible for a premium discount." << endl;
-        } else {
-            cout << name << " is not eligible for a premium discount." << endl;
-        }
-    }
+    virtual void checkDiscountEligibility() = 0; 
+
+    virtual ~Customer() {}  
 };
 
 int Customer::customerCount = 0;
@@ -39,6 +33,10 @@ public:
     void displayDetails() override {
         cout << "Regular Customer: " << name << ", Age: " << age << endl;
     }
+
+    void checkDiscountEligibility() override {
+        cout << name << " is not eligible for a premium discount." << endl;
+    }
 };
 
 class PremiumCustomer : public Customer {
@@ -48,5 +46,13 @@ public:
 
     void displayDetails() override {
         cout << "Premium Customer: " << name << ", Age: " << age << endl;
+    }
+
+    void checkDiscountEligibility() override {
+        if (age > 25) {
+            cout << name << " is eligible for a premium discount." << endl;
+        } else {
+            cout << name << " is not eligible for a premium discount." << endl;
+        }
     }
 };
