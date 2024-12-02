@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
 
-// Base Customer class
 class Customer {
 protected:
     string name;
@@ -11,36 +9,25 @@ protected:
 
 public:
     Customer(string name, int age) : name(name), age(age) {}
-
-    string getName() const { return name; }
-    int getAge() const { return age; }
+    virtual ~Customer() {}
 
     virtual void displayDetails() {
         cout << "Customer Name: " << name << ", Age: " << age << endl;
     }
 
-    virtual ~Customer() {} // Virtual destructor to support polymorphism
+    virtual bool isEligibleForDiscount() = 0; // Pure virtual function
 };
 
-// Separate class to handle discount eligibility logic (SRP applied)
-class DiscountEligibilityChecker {
-public:
-    static void checkDiscountEligibility(Customer* customer) {
-        if (customer->getAge() > 25) {
-            cout << customer->getName() << " is eligible for a premium discount." << endl;
-        } else {
-            cout << customer->getName() << " is not eligible for a premium discount." << endl;
-        }
-    }
-};
-
-// Derived classes
 class RegularCustomer : public Customer {
 public:
     RegularCustomer(string name, int age) : Customer(name, age) {}
 
     void displayDetails() override {
         cout << "Regular Customer: " << name << ", Age: " << age << endl;
+    }
+
+    bool isEligibleForDiscount() override {
+        return age > 25; // Regular customers must be older than 25 for discounts
     }
 };
 
@@ -51,14 +38,8 @@ public:
     void displayDetails() override {
         cout << "Premium Customer: " << name << ", Age: " << age << endl;
     }
-};
 
-// using ocp
-class VIPCustomer : public Customer {
-public:
-    VIPCustomer(string name, int age) : Customer(name, age) {}
-
-    void displayDetails() override {
-        cout << "VIP Customer: " << name << ", Age: " << age << endl;
+    bool isEligibleForDiscount() override {
+        return true; // Premium customers are always eligible
     }
 };
